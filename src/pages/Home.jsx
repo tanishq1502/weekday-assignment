@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators } from "../redux/actions/actionCreators";
 
-import { Container, Box, Typography, CircularProgress } from "@mui/material";
+import { Container, Box, Typography, CircularProgress, Grid } from "@mui/material";
 
 import JobListingCard from "../components/JobListingCard";
 
@@ -60,7 +60,17 @@ function Home() {
         >
           {Array.isArray(jobData) ? (
             jobData.length ? (
-              jobData.map((jd) => <JobListingCard key={jd.jdUid} data={jd} />)
+              <Grid
+                container
+                rowSpacing={1}
+                columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+              >
+                {jobData.map((jd) => (
+                  <Grid item key={jd.jdUid} xs={4}>
+                    <JobListingCard data={jd} />
+                  </Grid>
+                ))}
+              </Grid>
             ) : (
               <Typography
                 sx={{

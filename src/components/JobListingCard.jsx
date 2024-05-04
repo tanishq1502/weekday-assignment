@@ -6,12 +6,29 @@ import FaceImage2 from "/images/face_image_2.webp";
 import ImagePlaceholder from "/images/image_placeholder.png";
 
 import { getHeightWidth } from "../utils/utilityFunctions";
+import { useModalContext } from "../utils/ModalContext";
+import ModalContentWrapper from "./ModalContentWrapper";
 
 function JobListingCard({ data, mode = "default" }) {
+  const modalContext = useModalContext();
+
+  const handleViewJob = ({ data }) => {
+    modalContext?.handleModalOpen();
+    modalContext?.setComponent(
+      <ModalContentWrapper
+        heading="Job Description"
+        handleModalClose={modalContext.handleModalClose}
+        rootStyles={{ height: "60rem" }}
+        contentStyles={{ padding: 0 }}
+      >
+        <JobListingCard data={data} mode="view" />
+      </ModalContentWrapper>
+    );
+  };
   return (
     <Box
       sx={{
-        width: "33rem",
+        width: "auto",
         boxShadow: 3,
         padding: "2rem",
         borderRadius: "2rem",
@@ -40,21 +57,21 @@ function JobListingCard({ data, mode = "default" }) {
       <Box>
         <Box sx={{ display: "flex", alignItems: "center", gap: "1rem" }}>
           <Box
-              sx={{
-                ...getHeightWidth("lg"),
-                bgcolor: "custom.grey_3",
-                borderRadius: "50%",
-                overflow: "hidden",
-              }}
-            >
-              {ImagePlaceholder ? (
-                <Box
-                  component="img"
-                  src={ImagePlaceholder}
-                  sx={{ width: "100%", height: "100%", objectFit: "contain" }}
-                />
-              ) : null}
-            </Box>
+            sx={{
+              ...getHeightWidth("lg"),
+              bgcolor: "custom.grey_3",
+              borderRadius: "50%",
+              overflow: "hidden",
+            }}
+          >
+            {ImagePlaceholder ? (
+              <Box
+                component="img"
+                src={ImagePlaceholder}
+                sx={{ width: "100%", height: "100%", objectFit: "contain" }}
+              />
+            ) : null}
+          </Box>
 
           <Box>
             <Box></Box>
@@ -131,7 +148,7 @@ function JobListingCard({ data, mode = "default" }) {
                 cursor: "pointer",
                 color: "#4943da",
               }}
-            //   onClick={() => handleViewJob({ data })}
+              onClick={() => handleViewJob({ data })}
             >
               View Job
             </Box>
@@ -170,11 +187,10 @@ function JobListingCard({ data, mode = "default" }) {
           sx={{
             width: "100%",
             borderRadius: ".75rem",
-            color: "black",
+            color: "white",
             textTransform: "none",
             padding: ".8rem 1.8rem",
             backgroundColor: "#4943da",
-
             "&:hover": { backgroundColor: "#4943da" },
           }}
           variant="contained"
