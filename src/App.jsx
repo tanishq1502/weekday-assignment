@@ -6,8 +6,7 @@ import "@fontsource/roboto/700.css";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 
 import { Provider } from "react-redux";
-import { PersistGate } from "redux-persist/integration/react";
-import { store, persistedStore } from "./redux/store";
+import { store } from "./redux/store";
 
 import { ThemeProvider } from "@mui/material";
 import theme from "./utils/theme";
@@ -21,12 +20,10 @@ function App() {
       <ModalContextProvider>
         <BrowserRouter>
           <Provider store={store}>
-            <PersistGate persistor={persistedStore}>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="*" element={<div>Not found</div>} />
-              </Routes>
-            </PersistGate>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="*" element={<div>Not found</div>} />
+            </Routes>
           </Provider>
         </BrowserRouter>
       </ModalContextProvider>

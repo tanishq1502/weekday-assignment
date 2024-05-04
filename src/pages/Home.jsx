@@ -32,6 +32,30 @@ function Home() {
   const dispatch = useDispatch();
   const jobData = useSelector((state) => state.GetJobData?.data?.jdList);
 
+  const getJobCards = () => {
+    return Array.isArray(jobData) ? (
+      jobData.length ? (
+        <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+          {jobData.map((jd, index) => (
+            <Grid item key={`${jd.jdUid}_${index}`} xs={12} md={5} lg={4}>
+              <JobListingCard data={jd} />
+            </Grid>
+          ))}
+        </Grid>
+      ) : (
+        <Typography
+          sx={{
+            typography: "body1",
+            textAlign: "center",
+            fontWeight: 600,
+          }}
+        >
+          No jobs found
+        </Typography>
+      )
+    ) : null;
+  };
+
   useEffect(() => {
     const body = {
       limit: 9,
@@ -141,31 +165,7 @@ function Home() {
             flexWrap: "wrap",
           }}
         >
-          {Array.isArray(jobData) ? (
-            jobData.length ? (
-              <Grid
-                container
-                rowSpacing={1}
-                columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-              >
-                {jobData.map((jd, index) => (
-                  <Grid item key={`${jd.jdUid}_${index}`} xs={12} md={5} lg={4}>
-                    <JobListingCard data={jd} />
-                  </Grid>
-                ))}
-              </Grid>
-            ) : (
-              <Typography
-                sx={{
-                  typography: "body1",
-                  textAlign: "center",
-                  fontWeight: 600,
-                }}
-              >
-                No jobs found
-              </Typography>
-            )
-          ) : null}
+          {getJobCards()}
         </Box>
       )}
       {jobData?.length && (

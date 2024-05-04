@@ -30,7 +30,7 @@ export const GetJobDataReducer = (newState = state, action) => {
                 totalCount: action.payload.totalCount,
                 jdList: [...newData.jdList, ...action.payload.jdList]
             },
-            tempData: null // Reset tempData after updating data
+            tempData: null
         };
 
         case 'GET_JOB_DATA_FAILURE': return {
