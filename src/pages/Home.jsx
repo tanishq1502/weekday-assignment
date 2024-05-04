@@ -65,7 +65,10 @@ function Home() {
   }, [isIntersecting]);
 
   return (
-    <Container maxWidth={false} sx={{ paddingTop: "2rem", paddingBottom: "2rem" }}>
+    <Container
+      maxWidth={false}
+      sx={{ paddingTop: "2rem", paddingBottom: "2rem" }}
+    >
       <Grid
         container
         columnGap={2}
@@ -145,8 +148,8 @@ function Home() {
                 rowSpacing={1}
                 columnSpacing={{ xs: 1, sm: 2, md: 3 }}
               >
-                {jobData.map((jd) => (
-                  <Grid item key={jd.jdUid} xs={12} md={5} lg={4}>
+                {jobData.map((jd, index) => (
+                  <Grid item key={`${jd.jdUid}_${index}`} xs={12} md={5} lg={4}>
                     <JobListingCard data={jd} />
                   </Grid>
                 ))}

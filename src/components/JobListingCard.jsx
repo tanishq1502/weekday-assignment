@@ -64,13 +64,19 @@ function JobListingCard({ data, mode = "default" }) {
               overflow: "hidden",
             }}
           >
-            {ImagePlaceholder ? (
+            {data.logoUrl ? (
+              <Box
+                component="img"
+                src={data.logoUrl}
+                sx={{ width: "100%", height: "100%", objectFit: "contain" }}
+              />
+            ) : (
               <Box
                 component="img"
                 src={ImagePlaceholder}
                 sx={{ width: "100%", height: "100%", objectFit: "contain" }}
               />
-            ) : null}
+            )}
           </Box>
 
           <Box>
