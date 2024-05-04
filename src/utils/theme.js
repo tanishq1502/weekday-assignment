@@ -19,15 +19,7 @@ const customPalette = {
 const theme = createTheme({
   typography: {
     fontFamily: "Roboto",
-    htmlFontSize: 10,
-    h1: { fontSize: "4.25rem" },
-    h2: { fontSize: "3.25rem" },
-    h3: { fontSize: "2.25rem" },
-    h6: { fontSize: "6.5rem" },
-    body1: { fontSize: "2rem" },
-    body2: { fontSize: "1.8rem" },
-    subtitle1: { fontSize: "1.6rem" },
-    subtitle2: { fontSize: "1.4rem" },
+    htmlFontSize: 16,
   },
   components: {
     MuiCssBaseline: {
