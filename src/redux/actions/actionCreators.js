@@ -2,7 +2,8 @@ import Actions from "./actions";
 import axios from "axios";
 
 export const actionCreators = {
-  getJobData: (body) => {
+
+  getJobData: (body,filters) => {
     return async (dispatch) => {
       dispatch({ type: Actions.GET_JOB_DATA_REQUEST });
       try {
@@ -13,7 +14,10 @@ export const actionCreators = {
         if (res?.status === 200) {
           dispatch({
             type: Actions.GET_JOB_DATA_SUCCESS,
-            payload: res.data,
+            payload: {
+              jobData: res.data,
+              filters: filters
+            },
           });
           return res;
         } else {

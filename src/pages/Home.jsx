@@ -23,11 +23,7 @@ function Home() {
   const [offset, setOffset] = useState(0);
   const [isError, setError] = useState(false);
   const [isLoading, setLoading] = useState(false);
-  const [roles, setRoles] = useState([]);
-  const [employees, setEmployees] = useState([]);
-  const [experience, setExperience] = useState([]);
-  const [jobType, setJobType] = useState([]);
-  const [salary, setSalary] = useState([]);
+  const [filters, setFilters] = useState([]);
 
   const dispatch = useDispatch();
   const jobData = useSelector((state) => state.GetJobData?.data?.jdList);
@@ -63,7 +59,7 @@ function Home() {
     };
 
     setLoading(true);
-    dispatch(actionCreators.getJobData(body))
+    dispatch(actionCreators.getJobData(body,filters))
       .then(() => {
         setLoading(false);
       })
@@ -73,7 +69,7 @@ function Home() {
           setError(true);
         }
       });
-  }, [dispatch]);
+  }, [dispatch,filters]);
 
   const { targetRef, isIntersecting } = useIntersectionObserver({}, []);
 
@@ -84,9 +80,9 @@ function Home() {
         limit: 9,
         offset: offset + limit,
       };
-      dispatch(actionCreators.getJobData(body));
+      dispatch(actionCreators.getJobData(body,filters));
     }
-  }, [isIntersecting]);
+  }, [isIntersecting,filters]);
 
   return (
     <Container
@@ -105,40 +101,40 @@ function Home() {
           <Filters
             data={ROLE}
             label="Roles"
-            value={roles}
-            setValue={setRoles}
+            value={filters}
+            setValue={setFilters}
           />
         </Grid>
-        <Grid xs={12} md={5} lg={2} item>
+        {/* <Grid xs={12} md={5} lg={2} item>
           <Filters
             data={EMPLOYEES}
             label="No Of Employees"
-            value={employees}
-            setValue={setEmployees}
+            value={filters}
+            setValue={setFilters}
           />
-        </Grid>
+        </Grid> */}
         <Grid xs={12} sm={5} md={2} item>
           <Filters
             data={EXPERIENCE}
             label="Experience"
-            value={experience}
-            setValue={setExperience}
+            value={filters}
+            setValue={setFilters}
           />
         </Grid>
         <Grid xs={12} sm={5} md={2} item>
           <Filters
             data={JOB_TYPE}
             label="Job Type"
-            value={jobType}
-            setValue={setJobType}
+            value={filters}
+            setValue={setFilters}
           />
         </Grid>
         <Grid xs={12} sm={5} md={2} item>
           <Filters
             data={SALARY}
             label="Minimum Base Pay Salary"
-            value={salary}
-            setValue={setSalary}
+            value={filters}
+            setValue={setFilters}
           />
         </Grid>
       </Grid>

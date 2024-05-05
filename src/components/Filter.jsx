@@ -8,16 +8,19 @@ const Filters = ({ data, label, value, setValue }) => {
         sx={{ height: "100px" }}
         multiple
         id="fixed-tags-demo"
-        value={value}
+        value={value[label] || []}
         onChange={(event, newValue) => {
-          setValue([...newValue]);
+          setValue((prevFilters) => ({
+            ...prevFilters,
+            [label]: newValue || [],
+          }));
         }}
         options={data}
         getOptionLabel={(option) => option.title}
         renderTags={(tagValue, getTagProps) =>
           tagValue.map((option, index) => (
             <Chip
-              key={index}
+              key={`${label}-${index}`}
               label={option.title}
               {...getTagProps({ index })}
             />
