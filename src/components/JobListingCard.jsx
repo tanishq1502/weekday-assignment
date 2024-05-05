@@ -80,7 +80,11 @@ function JobListingCard({ data, mode = "default" }) {
           </Box>
 
           <Box>
-            <Box></Box>
+            {data.companyName && (
+              <Box sx={{ typography: "h4", textTransform: "capitalize" }}>
+                {data.companyName}
+              </Box>
+            )}
 
             {data.jobRole && (
               <Box sx={{ typography: "body2", textTransform: "capitalize" }}>
